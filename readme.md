@@ -57,14 +57,18 @@ if (code == et::Code::SUCCESS) {
 ### 扩展加密算法
 新加扩展方法需要继承 CryptoHandler 与 RegistHelper类 
 ```
-class Some : public CryptoHandler,
-                  public RegistHelper<Some, construct Args Type...> 
-                  {
-
-                  };
+class SomeAlgorithm : public CryptoHandler,public RegistHelper<SomeAlgorithm, construct Args Type...> 
+{
+};
 ```
-并实现加密与解密方法
+实现加密与解密方法
 ```
 Code Encode(const std::string& key, std::string* out);
 Code Decode(const std::string& key, std::string* out);
+```
+进行注册
+```
+const bool some_algorithm_registered = []() {
+  return SomeAlgorithm::Register("algorithm_name");
+}();
 ```
